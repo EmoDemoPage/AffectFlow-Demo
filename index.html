@@ -1,250 +1,574 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <style type="text/css">
-      a:link {
-        color: black;
-        text-decoration: none;
-      }
-      a:visited {
-        color: black;
-        text-decoration: none;
-      }
-      a:hover {
-        color: blue;
-        text-decoration: underline;
-      }
-    </style>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>AffectFlow Demo</title>
-    <!-- Font Awesome icons (free version)-->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- Fonts CSS-->
-    <link rel="stylesheet" href="css/heading.css" />
-    <link rel="stylesheet" href="css/body.css" />
-    <!-- Bootstrap slider CSS -->
-    <!-- <link rel="stylesheet" href="css/bootstrap-slider.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css" integrity="sha512-3q8fi8M0VS+X/3n64Ndpp6Bit7oXSiyCnzmlx6IDBLGlY5euFySyJ46RUlqIVs0DPCGOypqP8IRk/EyPvU28mQ==" crossorigin="anonymous" /> -->
+<head>
 
-    <script>
-      function createTable(dir, exp, audio, script, idx = 1) {
-        html =
-          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
-        html += '<thead><tr><th colspan="5" style="width: 40%">';
-        html += '<div class="text-left">Emotion : <i>';
-        html += script["emotion"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Script : <i>';
-        html += script["script"];
-        html += "</i></div></th></tr></thead><tbody><tr>";
-          for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 7) {
-              html += "<tr>";
-            }
-          
-            html += '<td style="vertical-align: top;"><p></p>';
+<meta charset="utf-8" />
 
-            html += key;
-          
-            html += '<div class="text-center"><audio controls="controls"><source src=';
-            f = dir + "/" + exp[key] + "/" + audio + ".wav";
-            html += f;
-            html += ' type="audio/wav" /></audio></div></td>';
-          
-            idx += 1;
-          
-            if (idx === 4 || idx === 7 || idx === 8) {
-              html += "</tr>";
-            }
-          }
-        html += "</tr></tbody></table>";
-        return html;
-      }
-    </script>
+<title>AffectFlow Demo</title>
 
-    <script>
-      function createTable2(dir, exp, audio, script, idx = 1) {
-        html =
-          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
-        html += '<thead><tr><th colspan="5" style="width: 40%">';
-        html += '<div class="text-left">Emotion : <i>';
-        html += script["emotion"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Speaker : <i>';
-        html += script["speaker"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Script : <i>';
-        html += script["script"];
-        html += "</i></div></th></tr></thead><tbody><tr>";
-          for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 7) {
-              html += "<tr>";
-            }
-          
-            html += '<td style="vertical-align: top;"><p></p>';
+<link href="css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/heading.css" />
+<link rel="stylesheet" href="css/body.css" />
 
-            html += key;
-          
-            html += '<div class="text-center"><audio controls="controls"><source src=';
-            f = dir + "/" + exp[key] + "/" + audio + ".wav";
-            html += f;
-            html += ' type="audio/wav" /></audio></div></td>';
-          
-            idx += 1;
-          
-            if (idx === 4 || idx === 7 || idx === 8) {
-              html += "</tr>";
-            }
-          }
-        html += "</tr></tbody></table>";
-        return html;
-      }
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
-    <script>
-      function createTable3(dir, exp, audio, script, idx = 1) {
-        html =
-          '<table class="table table-responsive align-content-center" style="background-color: white; border-radius: 20px">';
-        html += '<thead><tr><th colspan="5" style="width: 40%">';
-        html += '<div class="text-left">Emotion : <i>';
-        html += script["emotion"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Speaker : <i>';
-        html += script["speaker"];
-        html += '</i></div>'; 
-        html += '<div class="text-left">Script : <i>';
-        html += script["script"];
-        html += "</i></div></th></tr></thead><tbody><tr>";
-          for (var key in exp) {
-            if (idx === 1 || idx === 4 || idx === 7) {
-              html += "<tr>";
-            }
-          
-            html += '<td style="vertical-align: top;"><p></p>';
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-            html += key;
-          
-            html += '<div class="text-center"><audio controls="controls"><source src=';
-            f = dir + "/" + exp[key] + "/" + audio + ".wav";
-            html += f;
-            html += ' type="audio/wav" /></audio></div></td>';
-          
-            idx += 1;
-          
-            if (idx === 4 || idx === 7 || idx === 8) {
-              html += "</tr>";
-            }
-          }
-        html += "</tr></tbody></table>";
-        return html;
-      }
-    </script>
+<style>
 
-  </head>
-  <body id="page-top">
-    <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"
-          >AffectFlow</a
-        >
-        <button
-          class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          Menu <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#abstract">Abstract</a>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#cross_speaker">Conversation<br />Speech Synthesis</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ablation">Ablation<br />Study</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+.sample-card{
+background:white;
+border-radius:18px;
+padding:30px;
+margin-bottom:45px;
+box-shadow:0 3px 12px rgba(0,0,0,0.08);
+border:1px solid #e8e8e8;
+}
 
-    <header class="masthead bg-white text-left">
-      <!-- text-black 사용 가능 -->
-      <div class="container d-flex align-items-center flex-column">
-        <!-- Masthead Heading-->
-        <h1 class="masthead-heading mb-0">
-          AffectFlow: Word-Level Affective Flow Modeling for Conversational Speech Synthesis
-        </h1>
-      </div>
-    </header>
+/* script box */
+.script-box{
+background:#f5f5f5;
+padding:20px;
+border-radius:10px;
+margin-bottom:25px;
+font-size:15px;
+}
 
-    <!-- Abstraction -->
-    <section class="page-section portfolio" id="abstract">
-      <div class="container">
-        <!-- Portfolio Section Heading-->
-        <div class="text-center">
-          <h2 class="page-section-heading text-secondary mb-0 d-inline-block">
-            Abstract
-          </h2>
-        </div>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-          <div class="divider-custom"></div>
-        </div>
-        <!-- Portfolio Grid Items-->
-        <div class="row justify-content-center">
-          <div class="col-lg-12 ml-auto">
-            <p class="legend lead">
-              Conversational speech synthesis (CSS) aims to generate expressive speech that is coherent with conversational context, capturing both prosodic and affective nuances. However, existing approaches fail to align speech with the emotional context or rely on global utterance-level affective states, limiting their ability to model fine-grained and temporally evolving affective dynamics.To address these limitations, we propose AffectFlow, a novel framework that explicitly models fine-grained affective dynamics at the word level for CSS. To our knowledge, this is the first work to introduce word-level affective flow modeling for CSS grounded in empirical conversational analysis. Specifically, we introduce an affective flow predictor that captures local affective transitions, speaker-specific continuity, and global emotional evolution. Comprehensive subjective and objective evaluations demonstrate that AffectFlow more effectively captures contextual prosodic and affective nuances.
-            </p>
-            <br />
-            <br />
-            <p class="legend lead">
-              <strong>Official implementation of AffectFlow:</strong> 
-              <a href="https://github.com/EmoDemoPage/AffectFlow" target="_blank">https://github.com/EmoDemoPage/AffectFlow</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+/* audio inside script */
+
+.script-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.script-title{
+font-weight:700;
+}
+
+.script-audio{
+text-align:right;
+}
+
+.script-content{
+white-space:pre-line;
+}
+
+/* category divider */
+
+.category-divider{
+display:flex;
+align-items:center;
+text-align:center;
+margin:35px 0 15px 0;
+font-weight:600;
+color:#444;
+}
+
+.category-divider::before,
+.category-divider::after{
+content:'';
+flex:1;
+border-bottom:1px solid #ddd;
+}
+
+.category-divider::before{ margin-right:15px }
+.category-divider::after{ margin-left:15px }
+
+/* CSS model layout */
+
+.model-grid{
+display:grid;
+grid-template-columns:repeat(2,180px);
+justify-content:center;
+column-gap:300px;
+max-width:650px;
+margin:0 auto;
+margin-left:120px;
+}
+
+.model-single{
+display:flex;
+justify-content:center;
+margin-left:-120px;
+}
+
+/* Ablation grid */
+
+.model-grid-3{
+display:grid;
+grid-template-columns:repeat(3,180px);
+column-gap:180px;
+max-width:650px;
+margin:0 auto;
+justify-items:left;
+margin-left:-5px;
+}
+
+.model-box{
+text-align:left;
+padding:10px;
+width:180px;
+}
+
+.ours{
+color:#1b7f3c;
+font-weight:700;
+}
+
+.script-layout{
+display:grid;
+grid-template-columns: 1fr 260px;
+gap:20px;
+align-items:start;
+}
+
+.script-text{
+line-height:1.5;
+}
+
+.script-audio-player{
+min-width:220px;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.script-audio-label{
+font-weight:600;
+font-size:13px;
+margin-bottom:6px;
+text-align:center;
+color:#333;
+}
+
+.header-links {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.header-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: #fff;
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.header-link-btn:hover {
+  border-color: rgba(0,0,0,0.35);
+  text-decoration: none;
+}
+
+</style>
+
+<script>
+
+const audioList=[
+"5_1_d2442",
+"6_1_d1583",
+"4_1_d1248",
+"4_1_d808",
+"9_1_d2531",
+"5_1_d312"
+];
+
+const scripts={
+"6_1_d1583":{
+script:`<b>Previous Turn</b>
+A: Brown, please.<br>
+B: Here are some nice brown hats. Try this hat on. It's a very good one.<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: Yes, I like this one. It goes very well with my coat. How much is it?`
+},
+
+"5_1_d2442":{
+script:`<b>Previous Turn</b>
+A: Fine, thank you, and you?<br>
+B: Pretty good. What brings you here?<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: I came to see my uncle. He lives in the next block.`
+},
+
+"11_1_d2531":{
+script:`<b>Previous Turn</b>
+A: It's great! I've learned a lot from reading it.<br>
+B: Can I read it when you're done?<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: Sure, Bob! I'm on chapter twelve now, so I'm almost finished.`
+},
+
+"10_1_d1958":{
+script:`<b>Previous Turn</b>
+A: Which direction were you coming from?<br>
+B: Just straight.<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: Please move your vehicle off to the side of the road.`
+},
+
+"7_0_d255":{
+script:`<b>Previous Turn</b>
+A: Umm, I don't believe it.<br>
+B: But you know that smoking does harm to health, right?<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: Of course I know it, but you know it's hard to quit smoking...`
+},
+
+"4_1_d1248":{
+script:`<b>Previous Turn</b>
+A: A denim shirt and one of Serena Williams' used tennis rackets!<br>
+B: Your idol! Wow! You're even better at finding stuff than me!<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: Yep. I placed a bid for the shirt. The minimum was ten so i bet fifty!`
+},
+
+"9_1_d2531":{
+script:`<b>Previous Turn</b>
+A: It was written by Howard Sounds.<br>
+B: Umm, what do you think about it?<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: It's great! I've learned a lot from reading it.`
+},
+
+"4_1_d808":{
+script:`<b>Previous Turn</b>
+A: What's the matter?<br>
+B: Umm, the food station was as crowded as usual.<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: I see. You simply can't blame the server for this.`
+},
+
+"6_0_d303":{
+script:`<b>Previous Turn</b>
+A: Just about. There are at least a few hundred.<br>
+B: How many days will the reunion be?<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: Usually it's at least five days and four nights.`
+},
+
+"5_1_d312":{
+script:`<b>Previous Turn</b>
+A: A garage sale... That's where people check out cars, right?<br>
+B: What? Cars? Umm, are you serious?<br>
+
+<br>
+
+<b>Current Turn</b><br>
+<br>
+A: I'm pulling your leg, Paul. I'm a shopping queen, remember? So of course i know what a garage sale is all about!`
+}
+};
+
+const cssModels={
+
+"Reference Speech":{
+"Ground Truth":"GT",
+"Vocoded":"Vocoded"
+},
+
+"Context-Aware Modeling":{
+"BaseCSS":"BaseCSS",
+"FCTalker":"FCTalker"
+},
+
+"Emotion-Aware Modeling":{
+"ECSS":"ECSS",
+"JELLY":"JELLY"
+},
+
+"Affective Flow Modeling":{
+"AffectFlow (Ours)":"AffectFlow"
+}
+
+};
+
+const ablationModels={
+"Embedding-based":"Ablation_Embedding",
+"GRU":"Ablation_GRU",
+"GRU-DialogueRNN":"Ablation_DialogueRNN",
+"Affective Flow (Ours)":"AffectFlow"
+};
+
+function createCSSSample(audio){
+
+let html=`<div class="sample-card">`
+
+html+=`
+<div class="script-box">
+
+<div class="script-header">
+
+<div class="script-title">
+Previous Turn
+</div>
+
+</div>
+
+<div class="script-layout">
+
+<div class="script-text">
+${scripts[audio].script.replace('<b>Previous Turn</b>','')}
+</div>
+
+<div class="script-audio-player">
+
+<div class="script-audio-label">
+Previous Turn Speech
+</div>
+
+<audio controls>
+<source src="./wavs/ref/${audio}.wav">
+</audio>
+
+</div>
+
+</div>
+
+</div>
+`
+
+for(let category in cssModels){
+
+html+=`<div class="category-divider">${category}</div>`
+
+let models=cssModels[category]
+let count=Object.keys(models).length
+
+if(count==1){
+html+=`<div class="model-single">`
+}else{
+html+=`<div class="model-grid">`
+}
+
+for(let model in models){
+
+let cls=model.includes("Ours")?"ours":""
+
+html+=`
+<div class="model-box">
+<div class="${cls}">${model}</div>
+<audio controls>
+<source src="./wavs/${models[model]}/${audio}.wav">
+</audio>
+</div>
+`
+}
+
+html+=`</div>`
+}
+
+html+=`</div>`
+
+return html
+}
+
+function createAblationSample(audio){
+
+let html=`<div class="sample-card">`
+
+html+=`
+<div class="script-box">
+
+<div class="script-header">
+
+<div class="script-title">
+Previous Turn
+</div>
+
+</div>
+
+<div class="script-layout">
+
+<div class="script-text">
+${scripts[audio].script.replace('<b>Previous Turn</b>','')}
+</div>
+
+<div class="script-audio-player">
+
+<div class="script-audio-label">
+Previous Turn Speech
+</div>
+
+<audio controls>
+<source src="./wavs/ref/${audio}.wav">
+</audio>
+
+</div>
+
+</div>
+
+</div>
+`
+
+html+=`<div class="model-grid-3">`
+
+for(let model in ablationModels){
+
+let cls=model.includes("Ours")?"ours":""
+
+html+=`
+<div class="model-box">
+<div class="${cls}">${model}</div>
+<audio controls>
+<source src="./wavs/${ablationModels[model]}/${audio}.wav">
+</audio>
+</div>
+`
+}
+
+html+=`</div></div>`
+
+return html
+}
+
+function buildPage(){
+
+let cssHTML=""
+audioList.forEach(a=>{
+cssHTML+=createCSSSample(a)
+})
+document.getElementById("css_samples").innerHTML=cssHTML
+
+let ablHTML=""
+audioList.forEach(a=>{
+ablHTML+=createAblationSample(a)
+})
+document.getElementById("ablation_samples").innerHTML=ablHTML
+
+}
+
+</script>
+
+</head>
+
+<body id="page-top" onload="buildPage()">
+
+<nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
+<div class="container">
+
+<a class="navbar-brand js-scroll-trigger" href="#page-top">
+AffectFlow
+</a>
+
+<div class="collapse navbar-collapse">
+<ul class="navbar-nav ml-auto">
+
+<li class="nav-item">
+<a class="nav-link js-scroll-trigger" href="#cross_speaker">
+Conversation <br> Speech Synthesis
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link js-scroll-trigger" href="#ablation">
+Ablation Study
+</a>
+</li>
+
+</ul>
+</div>
+
+</div>
+</nav>
+
+<header class="masthead bg-white text-left">
+  
+<div class="container d-flex align-items-center">
+
+  <img src="./Figures/affectflow_mascot_4.png"
+       style="max-width:120px; margin-right:20px;">
+
+  <h1 class="masthead-heading mb-0">
+    AffectFlow: Word-Level Affective Flow Modeling for Conversational Speech Synthesis
+  </h1>
+
+</div>
 
 
+<div class="header-links">
+  <a class="header-link-btn" href="https://github.com/EmoDemoPage/AffectFlow" target="_blank" rel="noopener">
+    <i class="fab fa-github"></i>
+    <span>Source Code</span>
+  </a>
+</div>
+  
 
-    
-    <div class="scroll-to-top d-lg-none position-fixed">
-      <a
-        class="js-scroll-trigger d-block text-center text-white rounded"
-        href="#page-top"
-        ><i class="fa fa-chevron-up"></i
-      ></a>
-    </div>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <!-- Third party plugin JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+</header>
 
-    <script src="js/scripts.js"></script>
-    <!-- Bootstrap slider JavaScript -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"
-      integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA=="
-      crossorigin="anonymous"
-    ></script>
+<section class="page-section" id="cross_speaker">
+<div class="container">
 
-    <!-- slider JS -->
-    <script type="text/javascript"></script>
-  </body>
+<div class="text-center">
+<h2 class="page-section-heading text-secondary mb-0 d-inline-block">
+Conversation Speech Synthesis
+</h2>
+</div>
+<br>
+<br>
+<div id="css_samples"></div>
+
+</div>
+</section>
+
+<section class="page-section" id="ablation">
+<div class="container">
+
+<div class="text-center">
+<h2 class="page-section-heading text-secondary mb-0 d-inline-block">
+Ablation Study
+</h2>
+</div>
+<br>
+<br>
+<div id="ablation_samples"></div>
+
+</div>
+</section>
+
+</body>
 </html>
-
